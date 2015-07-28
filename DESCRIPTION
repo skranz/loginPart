@@ -1,0 +1,11 @@
+Package: loginPart
+Type: Package
+Title: A simple login framework as part of shiny apps (probably not very secure)
+Version: 0.1
+Date: 2015-05-22
+Author: Sebastian Kranz
+Maintainer: Sebastian Kranz <sebastian.kranz@uni-ulm.de>
+Description: A simple login framework for shiny (probably not very secure)
+License: GPL >= 2.0
+LazyData: TRUE
+Depends: openssl, shiny, shinyPart, shinyEvents, shinyBS, mailR, yaml, RSQLite
