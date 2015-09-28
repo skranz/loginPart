@@ -50,10 +50,12 @@ examples.loginPart = function() {
 
 }
 
-loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="",
+loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="",
     login = lop.login(...),
     crem = lop.crem(...),
-    crepa = lop.crepa(...), ...)
+    crepa = lop.crepa(...),
+    reset = lop.reset(...),...
+)
 {
   restore.point("make.lop")
   lop = list(
@@ -63,11 +65,13 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
     conn = conn,
     login.fun = login.fun,
     signup.fun = signup.fun,
+    reset.fun = reset.fun,
     check.email.fun = check.email.fun,
     email.text.fun = email.text.fun,
     login = login,
     crem = crem,
     crepa = crepa,
+    reset = reset,
     init.userid = init.userid,
     init.password = init.password
   )
@@ -80,6 +84,7 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
   lop  = shinyPart(id = id,container.id = container.id, fields=lop, ui.funs = list(
     login = lop.login.ui,
     signup.email = lop.create.email.user.ui,
+    reset.email = lop.reset.email.user.ui,
     create.password = lop.create.passwd.ui
   ))
 }
@@ -128,6 +133,14 @@ show.html.warning = function(id,msg="", color="red") {
 default.signup.fun = function(lop,...) {
   restore.point("default.signup.fun")
   ui.id = "signup.email"
+  partUI(lop,ui.id)
+  showPart( lop,container.id = lop$.container.id, ui.id = ui.id)
+}
+
+
+default.reset.fun = function(lop,...) {
+  restore.point("default.reset.fun")
+  ui.id = "reset.email"
   partUI(lop,ui.id)
   showPart( lop,container.id = lop$.container.id, ui.id = ui.id)
 }

@@ -24,6 +24,48 @@ lop.crem = function() {
 }
 
 
+lop.reset = function() {
+  list(
+    title = "<h3>Reset password for user account</h3>",
+    info1.label = "",
+    info2.label = "",
+    user.label="User",
+    password.label="Password",
+    email.label ="Email",
+    create.btn.label="Send email to confirm reset account.",
+    cancel.btn.label="Cancel",
+
+    user.inp="lop.create.user",
+    email.inp="lop.create.email",
+    password.inp="lop.create.password",
+    create.btn = "lop.create.btn",
+    cancel.btn = "lop.create.btn",
+    info="lop.create.info"
+  )
+}
+
+
+lop.reset.email.user.ui = function(lop, ...) {
+  restore.point("lop.reset.email.user.ui")
+  copy.into.env(source = lop$reset)
+
+  widgets = list(
+    HTML(title),
+    textInput(cid(email.inp,lop), email.label, value = ""),
+    #passwordInput(password.inp, password.label, value = ""),
+    actionButton(cid(create.btn,lop), create.btn.label),
+    actionButton(cid(cancel.btn,lop), cancel.btn.label),
+    uiOutput(cid(info,lop))
+  )
+  ui = wellPanel(widgets)
+
+  partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop)
+  ui
+}
+
+
+
+
 lop.create.email.user.ui = function(lop, ...) {
   restore.point("lop.create.email.user.ui")
   copy.into.env(source = lop$crem)
