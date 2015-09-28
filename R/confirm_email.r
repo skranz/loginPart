@@ -85,8 +85,11 @@ accept.passwd.click = function(lop, ...) {
   res = make.password.hash(password = lop$passwd, salt=salt)
   restore.point("accept.passwd.click2")
 
-  user = list(userid=lop$userid, email=lop$email, salt=salt, hash=res$hash,passwd=lop$passwd, confirmed=TRUE, create_time=Sys.time())
+  # Remove comment: for debugging purposes password will be stored
+  #user = list(userid=lop$userid, email=lop$email, salt=salt, hash=res$hash,passwd=lop$passwd, confirmed=TRUE, create_time=Sys.time())
 
+  # Don't store password in database
+  user = list(userid=lop$userid, email=lop$email, salt=salt, hash=res$hash, confirmed=TRUE, create_time=Sys.time())
 
 
   dbInsert(lop$conn, "users",user, mode="replace")
