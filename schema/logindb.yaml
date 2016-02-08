@@ -1,5 +1,4 @@
 # Tables for simple user management
-
 users:
   descr: user table
   table:
@@ -7,7 +6,6 @@ users:
     email: VARCHAR(255)
     salt: VARCHAR(2048)
     hash: VARCHAR(2048)
-    passwd: VARCHAR(20)
     confirmed: BOOLEAN
     create_time: DATETIME
   indexes:

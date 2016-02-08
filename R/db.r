@@ -39,7 +39,9 @@ lop.connect.db = function(db.arg=lop$db.arg,lop=get.lop()) {
   invisible(lop$conn)
 }
 
-lop.create.db = function(db.arg=lop$db.arg, overwrite=FALSE, schema.file = paste0(path.package("loginPart"),"/db/tables/lop_tables.yaml"),lop=get.lop()) {
+#' Create a new database for logins
+#' it stores users and temporary links
+create.login.db = function(db.arg=lop$db.arg, overwrite=FALSE, schema.file = paste0(path.package("loginPart"),"/schema/logindb.yaml"),lop=get.lop()) {
   restore.point("lop.create.db")
   conn = do.call(dbConnect, db.arg)
   dbCreateSchemaTables(conn =conn,schema.file = schema.file,overwrite = overwrite)

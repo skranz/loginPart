@@ -89,3 +89,14 @@ lop.check.login = function(userid, password, lop=get.lop()) {
   return(list(ok=FALSE,msg="Wrong password."))
 }
 
+
+check.email.domain = function(email, domain) {
+  ok = str.ends.with(email, domain)
+  if (!ok) {
+    return(list(ok=ok, msg=paste0("You can only create an account with an email that ends with ", domain)))
+  }
+  return(list(ok=ok, msg=""))
+}
+
+
+

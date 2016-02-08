@@ -50,14 +50,28 @@ examples.loginPart = function() {
 
 }
 
-loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="",
+loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="", email.domain=NULL,
     login = lop.login(...),
     crem = lop.crem(...),
     crepa = lop.crepa(...),
-    reset = lop.reset(...),...
+    reset = lop.reset(...),
+    ...
 )
 {
-  restore.point("make.lop")
+  restore.point("loginPart")
+
+  if (is.null(check.email.fun)) {
+    if (!is.null(email.domain)) {
+      check.email.fun = function(email,...) {
+        check.email.domain(email, email.domain)
+      }
+    } else {
+      check.email.fun = function(email,...) {
+        list(ok=TRUE,msg="")
+      }
+    }
+  }
+
   lop = list(
     app.title = app.title,
     app.url = app.url,
@@ -67,6 +81,7 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
     signup.fun = signup.fun,
     reset.fun = reset.fun,
     check.email.fun = check.email.fun,
+    email.domain = email.domain,
     email.text.fun = email.text.fun,
     login = login,
     crem = crem,
@@ -80,6 +95,8 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
     txt = poor.decrypt(sender.txt)
     lop$sender = yaml.load(txt)
   }
+
+
 
   lop  = shinyPart(id = id,container.id = container.id, fields=lop, ui.funs = list(
     login = lop.login.ui,
