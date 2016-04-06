@@ -19,7 +19,7 @@ lop.crepa = function() {
   crepa
 }
 
-show.confirm.email = function(lop,linkid,...) {
+show.confirm.email = function(lop,linkid, app=getApp(),...) {
   restore.point("show.confirm.email")
   showPart(lop,container.id = "mainUI",ui.id="create.password")
 
@@ -30,6 +30,7 @@ show.confirm.email = function(lop,linkid,...) {
     )
     setUI(lop$.container.id, ui)
   } else {
+    app$is.authenticated = TRUE
     link = as.list(link[1,,drop=FALSE])
     lop$userid = link$userid
     lop$email = link$userid
@@ -61,14 +62,13 @@ lop.create.passwd.ui = function(lop, ...) {
   generate.passwd.click(lop)
   partButtonHandler(create.btn,pa=lop,generate.passwd.click, lop=lop)
   partButtonHandler(accept.btn,pa=lop,accept.passwd.click, lop=lop)
-
   partButtonHandler(cancel.btn,pa=lop,cancel.passwd.click,lop=lop)
 
   #check.ui(ui)
   ui
 }
 
-generate.passwd.click = function(lop, ...) {
+generate.passwd.click = function(lop, ..., app=getApp()) {
   restore.point("generate.passwd.click")
 
   lop$passwd = random.password(nchar=5, chars=letters)
@@ -77,10 +77,10 @@ generate.passwd.click = function(lop, ...) {
   ))
 }
 
-accept.passwd.click = function(lop, ...) {
+accept.passwd.click = function(lop, app=getApp(),...) {
   restore.point("accept.passwd.click")
 
-  cat("\n\npaswwd: ", lop$passwd)
+  #cat("\n\npaswwd: ", lop$passwd)
   salt = make.salt()
   res = make.password.hash(password = lop$passwd, salt=salt)
   restore.point("accept.passwd.click2")
@@ -101,7 +101,7 @@ accept.passwd.click = function(lop, ...) {
 }
 
 
-cancel.passwd.click = function(lop, ...) {
+cancel.passwd.click = function(lop, app=getApp(),...) {
   restore.point("cancel.passwd.click")
   # Remove link
   dbDelete(lop$conn,"loginlinks", list(linkid=lop$linkid))

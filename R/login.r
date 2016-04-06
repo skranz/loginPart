@@ -33,9 +33,9 @@ lop.login.ui = function(lop,...) {
   )
   ui = wellPanel(widgets)
 
-  partButtonHandler(login.btn,pa=lop,lop.login.btn.click,lop=lop)
-  partButtonHandler(signup.btn,pa=lop,lop.signup.btn.click,lop=lop)
-  partButtonHandler(reset.btn,pa=lop,lop.reset.btn.click,lop=lop)
+  partButtonHandler(login.btn,pa=lop,lop.login.btn.click,lop=lop,no.authentication.required = TRUE)
+  partButtonHandler(signup.btn,pa=lop,lop.signup.btn.click,lop=lop,no.authentication.required = TRUE)
+  partButtonHandler(reset.btn,pa=lop,lop.reset.btn.click,lop=lop,no.authentication.required = TRUE)
   ui
 }
 
@@ -61,8 +61,10 @@ lop.login.btn.click = function(app=getApp(),lop,...) {
   res = lop.check.login(userid=userid,password = password, lop=lop)
   restore.point("lop.login.btn.click")
   if (res$ok==TRUE) {
+    app$is.authenticated = TRUE
     lop$login.fun(userid=userid, password=password, lop=lop)
   } else {
+    app$is.authenticated = FALSE
     login$failed.fun(userid=userid, password=password, msg=res$msg, lop=lop)
   }
 }

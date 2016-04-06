@@ -18,7 +18,7 @@ lop.crem = function() {
     email.inp="lop.create.email",
     password.inp="lop.create.password",
     create.btn = "lop.create.btn",
-    cancel.btn = "lop.create.btn",
+    cancel.btn = "lop.cancel.btn",
     info="lop.create.info"
   )
 }
@@ -39,7 +39,7 @@ lop.reset = function() {
     email.inp="lop.create.email",
     password.inp="lop.create.password",
     create.btn = "lop.create.btn",
-    cancel.btn = "lop.create.btn",
+    cancel.btn = "lop.cancel.btn",
     info="lop.create.info"
   )
 }
@@ -59,7 +59,8 @@ lop.reset.email.user.ui = function(lop, ...) {
   )
   ui = wellPanel(widgets)
 
-  partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop)
+  partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop,no.authentication.required = TRUE)
+  partButtonHandler(cancel.btn,pa=lop,cancel.create.email.user.click, lop=lop,no.authentication.required = TRUE)
   ui
 }
 
@@ -80,7 +81,8 @@ lop.create.email.user.ui = function(lop, ...) {
   )
   ui = wellPanel(widgets)
 
-  partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop)
+  partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop,no.authentication.required = TRUE)
+  partButtonHandler(cancel.btn,pa=lop,cancel.create.email.user.click, lop=lop,no.authentication.required = TRUE)
   ui
 }
 
@@ -115,10 +117,17 @@ create.email.user.click = function(lop, passwd.len=6,...) {
 }
 
 
+cancel.create.email.user.click = function(lop, ...) {
+  restore.point("cancel.create.email.user.click")
+
+  showPart(lop,container.id = lop$.container.id, ui.id=1)
+}
+
+
 lop.create.link = function(userid,link_type="confirm", lop=get.lop(), valid_secs=60*60*24*7) {
   restore.point("lop.create.link")
 
-  linkid = make.salt(20)
+  linkid = random.password(nchar = 40)
   url = paste0(lop$app.url,"/?confirm=",linkid)
   create_time = Sys.time()
   valid_until = Sys.time() + valid_secs

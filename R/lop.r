@@ -50,7 +50,7 @@ examples.loginPart = function() {
 
 }
 
-loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="", email.domain=NULL, smtp=NULL,
+loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="", email.domain=NULL, smtp=NULL, set.need.authentication = TRUE, app=getApp(),
     login = lop.login(...),
     crem = lop.crem(...),
     crepa = lop.crepa(...),
@@ -59,6 +59,9 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
 )
 {
   restore.point("loginPart")
+
+  if (set.need.authentication)
+    app$need.authentication = TRUE
 
   if (is.null(check.email.fun)) {
     if (!is.null(email.domain)) {
