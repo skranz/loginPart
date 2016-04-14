@@ -50,7 +50,7 @@ examples.loginPart = function() {
 
 }
 
-loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="", email.domain=NULL, smtp=NULL, set.need.authentication = TRUE, app=getApp(),
+loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL, signup.fun = default.signup.fun, reset.fun = default.reset.fun, check.email.fun=NULL, email.text.fun = default.email.text.fun, app.url = NULL, app.title=id, container.id = NULL, init.userid="", init.password="", email.domain=NULL, smtp=NULL, set.need.authentication = TRUE, send.password=FALSE, login.link = FALSE, app=getApp(),
     login = lop.login(...),
     crem = lop.crem(...),
     crepa = lop.crepa(...),
@@ -92,7 +92,9 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
     reset = reset,
     init.userid = init.userid,
     init.password = init.password,
-    smtp = smtp
+    smtp = smtp,
+    login.link = login.link,
+    send.password = send.password
   )
   if (!is.null(lop$sender.file)) {
     sender.txt = readLines(lop$sender.file)
