@@ -32,6 +32,7 @@ lop.login.ui = function(lop,...) {
     uiOutput(cid(alert,lop))
   )
   ui = wellPanel(widgets)
+  setUI(gid(alert,lop),"")
 
   partButtonHandler(login.btn,pa=lop,lop.login.btn.click,lop=lop,no.authentication.required = TRUE)
   partButtonHandler(signup.btn,pa=lop,lop.signup.btn.click,lop=lop,no.authentication.required = TRUE)

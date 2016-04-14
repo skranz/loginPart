@@ -58,6 +58,7 @@ lop.reset.email.user.ui = function(lop, ...) {
     uiOutput(cid(info,lop))
   )
   ui = wellPanel(widgets)
+  setUI(gid(info,lop),"")
 
   partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop,no.authentication.required = TRUE)
   partButtonHandler(cancel.btn,pa=lop,cancel.create.email.user.click, lop=lop,no.authentication.required = TRUE)
@@ -80,6 +81,7 @@ lop.create.email.user.ui = function(lop, ...) {
     uiOutput(cid(info,lop))
   )
   ui = wellPanel(widgets)
+  setUI(gid(info,lop),"")
 
   partButtonHandler(create.btn,pa=lop,create.email.user.click, lop=lop,no.authentication.required = TRUE)
   partButtonHandler(cancel.btn,pa=lop,cancel.create.email.user.click, lop=lop,no.authentication.required = TRUE)
@@ -92,7 +94,7 @@ create.email.user.click = function(lop, passwd.len=6,...) {
   restore.point("create.email.user.click")
 
   if (is.null(lop$smtp)) {
-    warning("lop$smpt not initialized")
+    warning("lop$smtp not initialized")
     return(NULL)
   }
 

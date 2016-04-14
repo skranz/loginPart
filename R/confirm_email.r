@@ -58,6 +58,8 @@ lop.create.passwd.ui = function(lop, ...) {
     uiOutput(cid(info,lop))
   )
   ui = wellPanel(widgets)
+  setUI(gid("passwd.display",lop),"")
+  setUI(gid("info",lop),"")
   #app = eventsApp()
   generate.passwd.click(lop)
   partButtonHandler(create.btn,pa=lop,generate.passwd.click, lop=lop)
