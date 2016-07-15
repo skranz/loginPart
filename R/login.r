@@ -2,11 +2,13 @@
 
 lop.login = function(failed.fun=lop.failed.login, create.user.fun=NULL,...) {
   login = list(
+    login.title = "",
     userid.label="user",
     password.label="password",
     login.btn.label="log in",
     signup.btn.label="sign up",
     reset.btn.label = "forgot password",
+    login.help = "",
 
     userid.inp="loginUser",
     password.inp="loginPassword",
@@ -24,12 +26,14 @@ lop.login.ui = function(lop,...) {
 
 
   widgets = list(
+    HTML(lop$login.title),
     textInput(cid(userid.inp,lop), userid.label, value = lop$init.userid),
     passwordInput(cid(password.inp,lop), password.label, value = lop$init.password),
     actionButton(cid(login.btn,lop), login.btn.label),
     actionButton(cid(signup.btn,lop), signup.btn.label),
     actionButton(cid(reset.btn,lop), reset.btn.label),
-    uiOutput(cid(alert,lop))
+    uiOutput(cid(alert,lop)),
+    HTML(lop$login.help)
   )
   ui = wellPanel(widgets)
   setUI(gid(alert,lop),"")
