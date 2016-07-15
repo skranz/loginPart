@@ -26,14 +26,14 @@ lop.login.ui = function(lop,...) {
 
 
   widgets = list(
-    HTML(lop$login.title),
+    HTML(lop$login$login.title),
     textInput(cid(userid.inp,lop), userid.label, value = lop$init.userid),
     passwordInput(cid(password.inp,lop), password.label, value = lop$init.password),
     actionButton(cid(login.btn,lop), login.btn.label),
     actionButton(cid(signup.btn,lop), signup.btn.label),
     actionButton(cid(reset.btn,lop), reset.btn.label),
     uiOutput(cid(alert,lop)),
-    HTML(lop$login.help)
+    HTML(lop$login$login.help)
   )
   ui = wellPanel(widgets)
   setUI(gid(alert,lop),"")
