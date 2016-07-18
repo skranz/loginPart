@@ -51,7 +51,7 @@ lop.reset.email.user.ui = function(lop, ...) {
 
   widgets = list(
     HTML(title),
-    textInput(cid(email.inp,lop), email.label, value = ""),
+    flexTextInput(cid(email.inp,lop), email.label, value = ""),
     #passwordInput(password.inp, password.label, value = ""),
     actionButton(cid(create.btn,lop), create.btn.label),
     actionButton(cid(cancel.btn,lop), cancel.btn.label),
@@ -74,7 +74,7 @@ lop.create.email.user.ui = function(lop, ...) {
 
   widgets = list(
     HTML(title),
-    textInput(cid(email.inp,lop), email.label, value = ""),
+    flexTextInput(cid(email.inp,lop), email.label, value = ""),
     #passwordInput(password.inp, password.label, value = ""),
     actionButton(cid(create.btn,lop), create.btn.label),
     actionButton(cid(cancel.btn,lop), cancel.btn.label),
