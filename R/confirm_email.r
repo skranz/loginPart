@@ -10,11 +10,11 @@ lop.crepa = function() {
     create.passwd.btn.label="Generate a password",
     cancel.btn.label="Cancel",
 
-    "passwd.display"="show.password.inp",
-    create.btn = "create.passwd.btn",
-    accept.btn = "accept.passwd.btn",
-    cancel.btn = "cancel.passwd.btn",
-    info="create.passwd.info"
+    "passwd.display"="showPasswordInp",
+    create.btn = "createPasswdBtn",
+    accept.btn = "acceptPasswdBtn",
+    cancel.btn = "cancelPasswdBtn",
+    info="createPasswdInfo"
   )
   crepa
 }

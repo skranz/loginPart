@@ -25,11 +25,12 @@ lop.login.ui = function(lop,...) {
   copy.into.env(source = lop$login)
 
 
+  sel = ids2sel(c(cid(userid.inp,lop),cid(password.inp,lop)))
   widgets = list(
     HTML(lop$login$login.title),
     textInput(cid(userid.inp,lop), userid.label, value = lop$init.userid),
     passwordInput(cid(password.inp,lop), password.label, value = lop$init.password),
-    actionButton(cid(login.btn,lop), login.btn.label),
+    actionButton(cid(login.btn,lop), login.btn.label, "data-form-selector"=sel),
     actionButton(cid(signup.btn,lop), signup.btn.label),
     actionButton(cid(reset.btn,lop), reset.btn.label),
     uiOutput(cid(alert,lop)),
@@ -58,10 +59,14 @@ lop.reset.btn.click = function(app=getApp(),lop,...) {
 
 
 
-lop.login.btn.click = function(app=getApp(),lop,...) {
+lop.login.btn.click = function(app=getApp(),lop,formValues,...) {
   login = lop$login
-  userid = partValue(login$userid.inp,lop)
-  password = partValue(login$password.inp,lop)
+  userid = formValues[[gid(login$userid.inp,lop)]]
+  password = formValues[[gid(login$password.inp,lop)]]
+
+  cat("userid = ", userid, " password = ", password)
+  #partValue(login$userid.inp,lop)
+  #password = partValue(login$password.inp,lop)
 
   res = lop.check.login(userid=userid,password = password, lop=lop)
   restore.point("lop.login.btn.click")

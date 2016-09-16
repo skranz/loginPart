@@ -14,12 +14,12 @@ lop.crem = function() {
     create.btn.label="Send email to confirm account",
     cancel.btn.label="Cancel",
 
-    user.inp="lop.create.user",
-    email.inp="lop.create.email",
-    password.inp="lop.create.password",
-    create.btn = "lop.create.btn",
-    cancel.btn = "lop.cancel.btn",
-    info="lop.create.info"
+    user.inp="lopCreateUser",
+    email.inp="lopCreateEmail",
+    password.inp="lopCreatePassword",
+    create.btn = "lopCreateBtn",
+    cancel.btn = "lopCancelBtn",
+    info="lopCreateInfo"
   )
 }
 
@@ -35,12 +35,12 @@ lop.reset = function() {
     create.btn.label="Send email to confirm reset account.",
     cancel.btn.label="Cancel",
 
-    user.inp="lop.create.user",
-    email.inp="lop.create.email",
-    password.inp="lop.create.password",
-    create.btn = "lop.create.btn",
-    cancel.btn = "lop.cancel.btn",
-    info="lop.create.info"
+    user.inp="lopCreateUser",
+    email.inp="lopCreateEmail",
+    password.inp="lopCreatePassword",
+    create.btn = "lopCreateBtn",
+    cancel.btn = "lopCancelBtn",
+    info="lopCreateInfo"
   )
 }
 
@@ -48,12 +48,13 @@ lop.reset = function() {
 lop.reset.email.user.ui = function(lop, ...) {
   restore.point("lop.reset.email.user.ui")
   copy.into.env(source = lop$reset)
+  sel = ids2sel(cid(email.inp,lop))
 
   widgets = list(
     HTML(title),
     flexTextInput(cid(email.inp,lop), email.label, value = ""),
     #passwordInput(password.inp, password.label, value = ""),
-    actionButton(cid(create.btn,lop), create.btn.label),
+    actionButton(cid(create.btn,lop), create.btn.label,"data-form-selector"=sel),
     actionButton(cid(cancel.btn,lop), cancel.btn.label),
     uiOutput(cid(info,lop))
   )
@@ -72,11 +73,12 @@ lop.create.email.user.ui = function(lop, ...) {
   restore.point("lop.create.email.user.ui")
   copy.into.env(source = lop$crem)
 
+  sel = ids2sel(cid(email.inp,lop))
   widgets = list(
     HTML(title),
     flexTextInput(cid(email.inp,lop), email.label, value = ""),
     #passwordInput(password.inp, password.label, value = ""),
-    actionButton(cid(create.btn,lop), create.btn.label),
+    actionButton(cid(create.btn,lop), create.btn.label, "data-form-selector"=sel),
     actionButton(cid(cancel.btn,lop), cancel.btn.label),
     uiOutput(cid(info,lop))
   )
@@ -88,9 +90,10 @@ lop.create.email.user.ui = function(lop, ...) {
   ui
 }
 
-create.email.user.click = function(lop, passwd.len=6,...) {
+create.email.user.click = function(lop, passwd.len=6,formValues,...) {
   copy.into.env(source = lop$crem)
-  user = email = partValue(email.inp,lop)
+  user = email = formValues[[gid(email.inp,lop)]]
+  #user = email =  partValue(email.inp,lop)
   restore.point("create.email.user.click")
 
   if (is.null(lop$smtp)) {
