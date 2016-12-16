@@ -116,6 +116,11 @@ loginPart = function(id="loginPart",db.arg=lop.db.arg(),conn=NULL,login.fun=NULL
 initLoginDispatch = function(lop, container.id=lop$.container.id, app=getApp()) {
   restore.point("initLoginDispatch")
   session = app$session
+
+  # TO DO: MAKE SESSION SPECIFIC COPY OF lop!!!
+  lop = as.environment(as.list(lop))
+  set.lop(lop)
+
   lop$.container.id = container.id
   observe(priority = -100,x = {
     query <- parseQueryString(session$clientData$url_search)
