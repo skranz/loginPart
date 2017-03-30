@@ -9,4 +9,3 @@ Description: A simple login framework for shiny (probably not very secure)
 License: GPL >= 2.0
 LazyData: TRUE
 Depends: openssl, shiny, shinyPart, shinyEvents, shinyBS, yaml, RSQLite
-Imports: mailR

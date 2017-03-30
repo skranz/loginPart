@@ -92,7 +92,7 @@ lop.create.email.user.ui = function(lop, ...) {
 
 create.email.user.click = function(lop, passwd.len=6,formValues,...) {
   copy.into.env(source = lop$crem)
-  user = email = formValues[[gid(email.inp,lop)]]
+  user = email = tolower(formValues[[gid(email.inp,lop)]])
   #user = email =  partValue(email.inp,lop)
   restore.point("create.email.user.click")
 

@@ -61,7 +61,7 @@ lop.reset.btn.click = function(app=getApp(),lop,...) {
 
 lop.login.btn.click = function(app=getApp(),lop,formValues,...) {
   login = lop$login
-  userid = formValues[[gid(login$userid.inp,lop)]]
+  userid = tolower(formValues[[gid(login$userid.inp,lop)]])
   password = formValues[[gid(login$password.inp,lop)]]
 
   cat("userid = ", userid, " password = ", password)
